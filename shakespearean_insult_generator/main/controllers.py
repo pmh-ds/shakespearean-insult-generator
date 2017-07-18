@@ -1,7 +1,8 @@
 import csv
 from random import randint
-from flask import Flask
-app = Flask(__name__)
+from flask import Blueprint
+
+main = Blueprint('main', __name__)
 
 # read insults
 insults_start = []
@@ -20,13 +21,10 @@ def generate_insult():
         + insults_middle[randint(0, len(insults_middle)-1)] + " "\
         + insults_end[randint(0, len(insults_end)-1)] + " "
     
-@app.route('/')
+@main.route('/')
 def insult():
     return "Thou {insult}".format(insult=generate_insult())
     
-@app.route('/<name>')
+@main.route('/<name>')
 def insult_name(name):
     return "{name}, thou {insult}".format(name=name, insult=generate_insult())
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=True)
