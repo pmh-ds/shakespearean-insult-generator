@@ -16,14 +16,17 @@ with open("insults.csv") as csvfile:
         insults_end.append(end)
 
 def generate_insult():
-    return "Thou " \
-        + insults_start[randint(0, len(insults_start)-1)] + " "\
+    return insults_start[randint(0, len(insults_start)-1)] + " "\
         + insults_middle[randint(0, len(insults_middle)-1)] + " "\
         + insults_end[randint(0, len(insults_end)-1)] + " "
     
 @app.route('/')
-def hello():
-    return generate_insult()
+def insult():
+    return "Thou {insult}".format(insult=generate_insult())
+    
+@app.route('/<name>')
+def insult_name(name):
+    return "{name}, thou {insult}".format(name=name, insult=generate_insult())
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
