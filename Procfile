@@ -1,1 +1,1 @@
-web: gunicorn shakespearean_insult_generator:app
+web: gunicorn run:app
