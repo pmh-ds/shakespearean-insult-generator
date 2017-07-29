@@ -18,10 +18,10 @@ def read_insults(insults_path):
 insults_start, insults_middle, insults_end = read_insults("insults.csv")
 
 
-def generate_insult(insults_start, insults_middle,  insults_end):
+def generate_insult(insults_start, insults_middle, insults_end):
     return insults_start[randint(0, len(insults_start)-1)] + " "\
         + insults_middle[randint(0, len(insults_middle)-1)] + " "\
-        + insults_end[randint(0, len(insults_end)-1)] + " "
+        + insults_end[randint(0, len(insults_end)-1)]
 
 
 @app.route('/')
