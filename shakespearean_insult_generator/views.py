@@ -1,4 +1,5 @@
 from random import randint
+from flask import render_template
 from shakespearean_insult_generator import app
 
 
@@ -26,14 +27,16 @@ def generate_insult(insults_start, insults_middle, insults_end):
 
 @app.route('/')
 def insult():
-    return "Thou {insult}".format(insult=generate_insult(insults_start,
-                                                         insults_middle,
-                                                         insults_end))
+    insult = "Thou {insult}".format(insult=generate_insult(insults_start,
+                                                           insults_middle,
+                                                           insults_end))
+    return render_template('index.html', insult=insult)
 
 
 @app.route('/<name>')
 def insult_name(name):
-    return "{name}, thou {insult}".format(name=name,
-                                          insult=generate_insult(insults_start,
-                                                                 insults_middle,
-                                                                 insults_end))
+    insult = "{name}, thou {insult}".format(name=name,
+                                            insult=generate_insult(insults_start,
+                                                                   insults_middle,
+                                                                   insults_end))
+    return render_template('index.html', insult=insult)
